@@ -1,6 +1,7 @@
 let incorrectAttempts = 0;
 let isLocked = false;
 let lockTimeout;
+let lockDuration = 5 * 60; // 5 minutes in seconds
 
 // Function to create typing animation effect
 document.addEventListener('DOMContentLoaded', function() {
@@ -21,6 +22,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, 3500); // Match with typing animation duration
 });
+
+// Function to check lock state on page load
+function checkLockState() {
+    const lockData = JSON.parse(localStorage.getItem('lockData'));
+    if (lockData) {
+        const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+        const remainingTime = lockData.endTime - currentTime;
+
+        if (remainingTime > 0) {
+            lockDuration = remainingTime; // Set remaining time
+            lockWebsite(); // Lock the website
+        } else {
+            localStorage.removeItem('lockData'); // Clear lock data if time is up
+        }
+    }
+}
 
 function validateInput(input) {
     // The correct input/locus - case insensitive check for "noli"
@@ -48,35 +65,67 @@ function validateInput(input) {
     }
 }
 
+// Function to lock the website
 function lockWebsite() {
     isLocked = true;
     incorrectAttempts = 0;
-    
+
     // Disable all interactive elements
     document.querySelector('.command-input').disabled = true;
     document.querySelectorAll('.riddle-button').forEach(button => {
         button.disabled = true;
     });
 
-    alert("Too many incorrect attempts. Website locked for 5 minutes.");
+    // Apply blur effect to the body
+    document.body.classList.add('locked');
 
-    // Set a timeout to unlock after 5 minutes
-    lockTimeout = setTimeout(() => {
-        unlockWebsite();
-    }, 5 * 60 * 1000); // 5 minutes in milliseconds
+    // Show timer overlay
+    const timerOverlay = document.getElementById('lock-timer');
+    timerOverlay.style.display = 'flex'; // Use flex to center content
+    timerOverlay.textContent = `Locked for ${lockDuration / 60} minutes`;
+
+    // Store lock state in localStorage
+    const endTime = Math.floor(Date.now() / 1000) + lockDuration; // Calculate end time
+    localStorage.setItem('lockData', JSON.stringify({ endTime }));
+
+    // Start countdown
+    let remainingTime = lockDuration;
+    const countdown = setInterval(() => {
+        remainingTime--;
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        timerOverlay.textContent = `Locked for ${minutes}:${seconds < 10 ? '0' : ''}${seconds} minutes`;
+
+        if (remainingTime <= 0) {
+            clearInterval(countdown);
+            unlockWebsite();
+        }
+    }, 1000); // Update every second
 }
 
+// Function to unlock the website
 function unlockWebsite() {
     isLocked = false;
-    
+
     // Re-enable all interactive elements
     document.querySelector('.command-input').disabled = false;
     document.querySelectorAll('.riddle-button').forEach(button => {
         button.disabled = false;
     });
 
-    alert("Website unlocked. You may try again.");
+    // Remove blur effect
+    document.body.classList.remove('locked');
+
+    // Hide timer overlay
+    const timerOverlay = document.getElementById('lock-timer');
+    timerOverlay.style.display = 'none';
+
+    // Clear lock data from localStorage
+    localStorage.removeItem('lockData');
 }
+
+// Call checkLockState on page load
+document.addEventListener('DOMContentLoaded', checkLockState);
 
 // Add event listener to the Enter button
 document.getElementById('enter-btn').addEventListener('click', () => {
@@ -151,7 +200,7 @@ document.getElementById('clue-btn').addEventListener('click', function() {
 });
 
 // Add event listener for the Get Riddle button
-document.getElementById('riddle-btn').addEventListener('click', () => {
+document.getElementById('riddle-btn').addEventListener('click', function() {
     const riddleText = document.querySelector('.riddle-text');
     
     // Create backdrop dynamically if it doesn't exist or get existing one
@@ -187,7 +236,7 @@ document.getElementById('riddle-btn').addEventListener('click', () => {
     riddleText.classList.add('show');
     backdrop.classList.add('show');
     
-    // Make the riddle disappear after 3 seconds
+    // Make the riddle disappear after 10 seconds
     setTimeout(() => {
         riddleText.classList.remove('show');
         backdrop.classList.remove('show');
@@ -202,5 +251,8 @@ document.getElementById('riddle-btn').addEventListener('click', () => {
             riddleText.classList.remove('hide');
             backdrop.classList.remove('hide');
         }, 500); // Match with fadeOut animation duration
-    }, 3000);
+    }, 10000); // 10 seconds
+
+    // Hide the Get Riddle button immediately when pressed
+    this.style.display = 'none'; // Hide the button
 });
