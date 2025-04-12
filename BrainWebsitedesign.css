@@ -181,24 +181,25 @@ body {
     animation: typing 3.5s steps(40, end);
 }
 
-/* First riddle button (Enter) */
-.riddle-button:nth-of-type(1) {
+/* Enter button */
+#enter-btn {
     top: 65%;
 }
 
-/* Second riddle button (Get Clue) - will be hidden after click */
-.riddle-button.clue-button {
+/* Get Clue button */
+#clue-btn {
     top: 73%;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Third riddle button (Get Riddle) */
-.riddle-button:last-child {
+/* Get Riddle button */
+#riddle-btn {
     top: 81%;
+    z-index: 10;
 }
 
 /* When clue button is hidden, adjust the Get Riddle button position */
-.clue-button[style*="display: none"] ~ .riddle-button:last-child {
+#clue-btn[style*="display: none"] ~ #riddle-btn {
     top: 73%;
     transition: top 0.5s ease;
 }
