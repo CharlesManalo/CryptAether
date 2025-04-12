@@ -1,0 +1,204 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: #98B67D; /* Matcha green color */
+    overflow-x: hidden;
+}
+
+.sequence-text {
+    text-align: center;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    font-family: 'Courier New', monospace;
+    white-space: pre-line;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 255, 0, 1), 
+                 0 0 25px rgba(0, 255, 0, 0.8);
+    font-size: 2em;
+    line-height: 1.6;
+    opacity: 1;
+    font-weight: bold;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+
+.command-input {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    font-size: 1.5em;
+    text-align: center;
+    outline: none;
+    caret-color: #ffffff;
+    caret-shape: block;
+}
+
+.command-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+.riddle-button {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 150px; /* Set fixed width */
+    margin-top: 10px;
+}
+
+.riddle-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    animation: glow 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+    to { opacity: 1; transform: translateY(0) translateX(-50%); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0) translateX(-50%); }
+    to { opacity: 0; transform: translateY(20px) translateX(-50%); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 0, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.5); }
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.command-input:focus {
+    animation: blink 1s step-end infinite;
+}
+
+.riddle-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Courier New', monospace;
+    font-size: 1.2em;
+    line-height: 1.6;
+    white-space: pre-line;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+    display: none;
+    top: 50%;
+    margin-top: 10px;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 25px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
+    border-radius: 5px;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 50;
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+.backdrop.show {
+    animation: fadeInBackdrop 0.3s ease forwards;
+}
+
+.backdrop.hide {
+    animation: fadeOutBackdrop 0.3s ease forwards;
+}
+
+.riddle-text.show {
+    display: block;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.riddle-text.hide {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+/* Additional fade animations for backdrop */
+@keyframes fadeInBackdrop {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOutBackdrop {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.typing-animation {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end);
+}
+
+/* First riddle button (Enter) */
+.riddle-button:nth-of-type(1) {
+    top: 65%;
+}
+
+/* Second riddle button (Get Clue) - will be hidden after click */
+.riddle-button.clue-button {
+    top: 73%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Third riddle button (Get Riddle) */
+.riddle-button:last-child {
+    top: 81%;
+}
+
+/* When clue button is hidden, adjust the Get Riddle button position */
+.clue-button[style*="display: none"] ~ .riddle-button:last-child {
+    top: 73%;
+    transition: top 0.5s ease;
+}
