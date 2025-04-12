@@ -51,7 +51,7 @@ function validateInput(input) {
     if (correctInput) {
         incorrectAttempts = 0;
         // Redirect to the new page on success - using encodeURI to handle special characters
-        window.location.href = "Crypt%20%C3%86ther.html";
+        window.location.href = "Crypt%20%C3%86ther2.html";
         return true;
     } else {
         incorrectAttempts++;
