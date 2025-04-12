@@ -79,7 +79,7 @@ function unlockWebsite() {
 }
 
 // Add event listener to the Enter button
-document.querySelector('.riddle-button').addEventListener('click', () => {
+document.getElementById('enter-btn').addEventListener('click', () => {
     const input = document.querySelector('.command-input').value;
     validateInput(input);
 });
@@ -93,7 +93,7 @@ document.querySelector('.command-input').addEventListener('keypress', (e) => {
 });
 
 // Add event listener for the Get Clue button
-document.querySelector('.clue-button').addEventListener('click', function() {
+document.getElementById('clue-btn').addEventListener('click', function() {
     // Hide the clue button itself
     this.style.display = 'none';
     
@@ -151,7 +151,7 @@ document.querySelector('.clue-button').addEventListener('click', function() {
 });
 
 // Add event listener for the Get Riddle button
-document.querySelector('.riddle-button:last-child').addEventListener('click', () => {
+document.getElementById('riddle-btn').addEventListener('click', () => {
     const riddleText = document.querySelector('.riddle-text');
     
     // Create backdrop dynamically if it doesn't exist or get existing one
