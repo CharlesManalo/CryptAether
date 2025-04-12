@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', monospace;
+    color: #00ff00; /* Neon green text */
+    overflow: hidden; /* Prevent scrolling */
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    z-index: 1; /* Ensure it covers the entire screen */
+}
+
+.timer-container {
+    position: relative;
+    z-index: 2; /* Ensure it appears above the backdrop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center vertically */
+}
+
+#timer {
+    font-size: 2em; /* Timer font size */
+    text-align: center;
+}
