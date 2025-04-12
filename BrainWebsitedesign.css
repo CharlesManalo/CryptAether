@@ -10,19 +10,22 @@ body {
     font-family: 'Courier New', monospace; /* Monospace font for a techy look */
 }
 
-.sequence-text {
-    text-align: center;
+.welcome-container {
     position: absolute;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    white-space: pre-line;
+    text-align: center;
+}
+
+.sequence-text {
     color: #00ff00; /* Neon green text */
-    text-shadow: 0 0 20px rgba(0, 255, 0, 1), 
-                 0 0 30px rgba(0, 255, 0, 0.8); /* Enhanced glow effect */
-    font-size: 2.5em; /* Increased font size for emphasis */
-    line-height: 1.6;
+    /* Remove the text-shadow to eliminate the glow effect */
+    /* text-shadow: 0 0 20px rgba(0, 255, 0, 1), 
+                 0 0 30px rgba(0, 255, 0, 0.8); */
+    font-size: 4vw; /* Adjusted to a smaller responsive size */
+    line-height: 1.6; /* Adjust line height if needed */
     opacity: 1;
     font-weight: bold;
     letter-spacing: 2px; /* Increased letter spacing for a digital feel */
@@ -252,8 +255,9 @@ body {
     }
 
     .sequence-text {
-        font-size: 8vw; /* Adjust font size for smaller screens */
+        font-size: 6vw; /* Adjust font size for smaller screens */
         margin: 10px; /* Reduce margin for smaller screens */
+        top: 40%; /* Adjust vertical position for better centering */
     }
 
     .command-input {
@@ -275,5 +279,30 @@ body {
 
     .timer-overlay {
         font-size: 3em; /* Adjust timer font size for visibility */
+    }
+}
+
+.animated-text {
+    color: #00ff00; /* Neon green text */
+    text-shadow: 0 0 20px rgba(0, 255, 0, 1), 
+                 0 0 30px rgba(0, 255, 0, 0.8); /* Optional glow effect */
+    font-size: 4vw; /* Adjusted to a smaller responsive size */
+    line-height: 1.6; /* Adjust line height if needed */
+    opacity: 0; /* Start invisible */
+    font-weight: bold;
+    letter-spacing: 2px; /* Increased letter spacing for a digital feel */
+    overflow: hidden;
+    animation: fadeIn 2s forwards; /* Apply fade-in animation */
+}
+
+/* Keyframes for fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Start fully transparent */
+        transform: translateY(-20px); /* Start slightly above */
+    }
+    to {
+        opacity: 1; /* End fully opaque */
+        transform: translateY(0); /* End in original position */
     }
 }
