@@ -244,3 +244,36 @@ body {
 .timer-overlay.no-blur {
     filter: none; /* Override blur effect */
 }
+
+/* Media Queries for smaller screens */
+@media (max-width: 600px) {
+    body {
+        font-size: 4vw; /* Adjust base font size for mobile */
+    }
+
+    .sequence-text {
+        font-size: 8vw; /* Adjust font size for smaller screens */
+        margin: 10px; /* Reduce margin for smaller screens */
+    }
+
+    .command-input {
+        width: 90%; /* Increase width for better usability */
+        font-size: 5vw; /* Adjust input font size */
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    .riddle-button {
+        width: 90%; /* Increase width for better usability */
+        font-size: 5vw; /* Adjust button font size */
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    .riddle-text {
+        font-size: 4vw; /* Adjust riddle text size */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .timer-overlay {
+        font-size: 3em; /* Adjust timer font size for visibility */
+    }
+}
