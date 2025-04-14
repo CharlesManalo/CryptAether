@@ -3,14 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypt Æ̸̢̢̦͍͔̣͇͂̇̎͛̀͜͠t̵̨̨̮͔͇̯̰͍͆͂̋̒̈́͗͠h̵̬̏ḛ̴̢̺̟̤̹̍͑́̓̉̇̇͑̉̈́͠r̷̛͉̫̠̱̃̈́̅̇ - Next Puzzle</title>
+    <title>Crypt Æ̸̢̢̦͍͔̣͇͂̇̎͛̀͜͠t̵̨̨̮͔͇̯̰͍͆͂̋̒̈́͗͠h̵̬̏ḛ̴̢̺̟̤̹̍͑́̓̉̇̇͑̉̈́͠r̷̛͉̫̠̱̃̈́̅̇ - Next Puzzle</title>
     <link rel="stylesheet" type="text/css" href="Crypt3.css">
-    <script src="Crypt3.js" defer></script>
 </head>
 <body>
+    <!-- Backdrop for initial timer -->
     <div class="backdrop" id="backdrop"></div>
+    
+    <!-- Timer container for initial countdown -->
     <div class="timer-container">
-        <div id="timer">Next puzzle unlocks in: 3d 0h 0m 0s</div>
+        <div id="timer">Next puzzle unlocks in: 10s</div>
     </div>
+    
+    <!-- Image and input container (hidden initially) -->
+    <div class="image-container" style="display: none;">
+        <img id="hidden-image" src="./images/FROG.png" alt="Hidden Puzzle Image">
+        
+        <!-- Message button container -->
+        <div class="hint-container">
+            <button id="hint-link" class="hint-link">Message</button>
+        </div>
+        
+        <input type="text" id="user-input" placeholder="Enter your answer">
+        <button id="verify-btn">Verify</button>
+        <div id="message" style="display: none;"></div>
+    </div>
+    
+    <!-- Message backdrop and message box (hidden initially) -->
+    <div id="message-backdrop" class="message-backdrop"></div>
+    <div id="hint-message" class="hint-message" style="display: none;">
+        <h3>🔍 Hidden Secrets Await 🕵️‍♀️</h3>
+        <p>This image contains more than what meets the eye.</p>
+        <p>A message lies within, tucked away beneath the pixels.</p>
+        <p>To uncover it, you'll need the right tools… and a little curiosity.</p>
+        <p class="highlight">💡 Hint:</p>
+        <p>The key to unlocking the message is hidden in plain sight.</p>
+        <p>Look closely—what do you see in the picture?</p>
+        <p class="highlight">🐾 The password is simple: the subject of the image.</p>
+        <p class="small-text">(Need a nudge? Think: loyal companion, four legs, tail wagging.)</p>
+    </div>
+    
+    <!-- Lock timer overlay (shown after 3 incorrect attempts) -->
+    <div class="timer-overlay" id="lock-timer" style="display: none;"></div>
+    
+    <script src="Crypt3.js"></script>
 </body>
 </html>
