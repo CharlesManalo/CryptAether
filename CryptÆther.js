@@ -146,6 +146,7 @@ document.getElementById('clue-btn').addEventListener('click', function() {
     // Hide the clue button itself
     this.style.display = 'none';
     
+    const messageContainer = document.getElementById('message-container');
     const riddleText = document.querySelector('.riddle-text');
     
     // Create backdrop dynamically if it doesn't exist or get existing one
@@ -168,18 +169,25 @@ document.getElementById('clue-btn').addEventListener('click', function() {
     backdrop.style.backdropFilter = 'blur(5px)';
     backdrop.style.webkitBackdropFilter = 'blur(5px)';
     backdrop.style.zIndex = '50';
-    
-    riddleText.textContent = "The FIRST famous book name of Dr. Jose Rizal";
-    
-    // Apply animations to riddle and backdrop
-    riddleText.classList.remove('hide');
-    backdrop.classList.remove('hide');
-    
-    riddleText.style.display = 'block';
     backdrop.style.display = 'block';
     
+    // Set the text content
+    riddleText.textContent = "The FIRST famous book name of Dr. Jose Rizal";
+    
+    // Remove any existing classes
+    riddleText.classList.remove('hide');
+    riddleText.classList.remove('show');
+    backdrop.classList.remove('hide');
+    backdrop.classList.remove('show');
+    
+    // Display the message container with flex to ensure centering
+    messageContainer.style.display = 'flex';
+    
+    // Add show classes for animation
     riddleText.classList.add('show');
     backdrop.classList.add('show');
+    
+    console.log("Displaying clue"); // Debug message
     
     // Make the clue disappear after 3 seconds
     setTimeout(() => {
@@ -190,7 +198,7 @@ document.getElementById('clue-btn').addEventListener('click', function() {
         backdrop.classList.add('hide');
         
         setTimeout(() => {
-            riddleText.style.display = 'none';
+            messageContainer.style.display = 'none';
             backdrop.style.display = 'none';
             
             riddleText.classList.remove('hide');
@@ -201,6 +209,9 @@ document.getElementById('clue-btn').addEventListener('click', function() {
 
 // Add event listener for the Get Riddle button
 document.getElementById('riddle-btn').addEventListener('click', function() {
+    console.log("Riddle button clicked"); // Debug message
+    
+    const messageContainer = document.getElementById('message-container');
     const riddleText = document.querySelector('.riddle-text');
     
     // Create backdrop dynamically if it doesn't exist or get existing one
@@ -221,20 +232,26 @@ document.getElementById('riddle-btn').addEventListener('click', function() {
     backdrop.style.height = '100vh';
     backdrop.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
     backdrop.style.backdropFilter = 'blur(5px)';
-    backdrop.style.webkitBackdropFilter = 'blur(5px)';
     backdrop.style.zIndex = '50';
-    
-    riddleText.textContent = "I spoke of shadows in a town that sleeps,\nIn ink, I sowed what the tyrant reaps.\nLatin whispers on my book's first breath,\nWhat single word lights freedom's death?";
-    
-    // Apply animations to riddle and backdrop
-    riddleText.classList.remove('hide');
-    backdrop.classList.remove('hide');
-    
-    riddleText.style.display = 'block';
     backdrop.style.display = 'block';
     
+    // Set the text content
+    riddleText.textContent = "I spoke of shadows in a town that sleeps,\nIn ink, I sowed what the tyrant reaps.\nLatin whispers on my book's first breath,\nWhat single word lights freedom's death?";
+    
+    // Remove any existing classes
+    riddleText.classList.remove('hide');
+    riddleText.classList.remove('show');
+    backdrop.classList.remove('hide');
+    backdrop.classList.remove('show');
+    
+    // Display the message container with flex to ensure centering
+    messageContainer.style.display = 'flex';
+    
+    // Add show classes for animation
     riddleText.classList.add('show');
     backdrop.classList.add('show');
+    
+    console.log("Displaying riddle"); // Debug message
     
     // Make the riddle disappear after 10 seconds
     setTimeout(() => {
@@ -245,7 +262,7 @@ document.getElementById('riddle-btn').addEventListener('click', function() {
         backdrop.classList.add('hide');
         
         setTimeout(() => {
-            riddleText.style.display = 'none';
+            messageContainer.style.display = 'none';
             backdrop.style.display = 'none';
             
             riddleText.classList.remove('hide');
