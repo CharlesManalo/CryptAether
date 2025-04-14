@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypt Æ̸̢̢̦͍͔̣͇͂̇̎͛̀͜͠t̵̨̨̮͔͇̯̰͍͆͂̋̒̈́͗͠h̵̬̏ḛ̴̢̺̟̤̹̍͑́̓̉̇̇͑̉̈́͠r̷̛͉̫̠̱̃̈́̅̇</title>
+    <title>Crypt Æ̸̢̢̦͍͔̣͇͂̇̎͛̀͜͠t̵̨̨̮͔͇̯̰͍͆͂̋̒̈́͗͠h̵̬̏ḛ̴̢̺̟̤̹̍͑́̓̉̇̇͑̉̈́͠r̷̛͉̫̠̱̃̈́̅̇</title>
     <link rel="stylesheet" type="text/css" href="BrainWebsitedesign.css">
 </head>
 <body>
     <div class="welcome-container">
         <h1 class="sequence-text">Welcome to Crypt</h1>
-        <h1 class="sequence-text">Æ̳̣͑͂t͉͒ͬḩ̛̌́ë̵̩͇́ͨ̔ŗ̧̔̏̽</h1>
+        <h1 class="sequence-text">Æ̳̣͑͂t͉͒ͬḩ̛̌́ë̵̩͇́ͨ̔ŗ̧̔̏̽</h1>
     </div>
     <input type="text" class="command-input" placeholder="Enter the locus." autofocus>
     <button id="enter-btn" class="riddle-button">Enter</button>
     <button id="clue-btn" class="riddle-button clue-button">Get Clue</button>
-    <div class="riddle-text"></div>
+    
+    <!-- Message container for centering -->
+    <div id="message-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; z-index: 90;">
+        <div class="riddle-text"></div>
+    </div>
     <button id="riddle-btn" class="riddle-button">Get Riddle</button>
+    
     <div class="timer-overlay" id="lock-timer" style="display: none;"></div>
     <script src="CryptÆther.js"></script>
 </body>
