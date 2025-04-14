@@ -38,20 +38,25 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: 300px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.7); /* Darker input background */
+    padding: 10px 5px;
+    background-color: transparent;
     border: none;
-    border-bottom: 2px solid #00ff00; /* Neon green border */
+    border-bottom: 2px solid #00ff00; /* Neon green border on bottom only */
     color: #00ff00; /* Neon green text */
     font-size: 1.5em;
     text-align: center;
     outline: none;
     caret-color: #00ff00; /* Neon green caret */
+    transition: border-color 0.3s ease;
 }
 
 .command-input::placeholder {
-    color: rgba(255, 255, 255, 0.5); /* Lighter placeholder for contrast */
+    color: rgba(0, 255, 0, 0.5); /* Lighter placeholder for contrast */
     font-style: italic;
+}
+
+.command-input:focus {
+    border-bottom: 2px solid #ffffff; /* White border on focus */
 }
 
 .riddle-button {
@@ -100,10 +105,6 @@ body {
 @keyframes typing {
     from { width: 0; }
     to { width: 100%; }
-}
-
-.command-input:focus {
-    animation: blink 1s step-end infinite;
 }
 
 .riddle-text {
@@ -267,7 +268,7 @@ body {
     .command-input {
         width: 90%; /* Increase width for better usability */
         font-size: 5vw; /* Adjust input font size */
-        padding: 8px; /* Adjust padding for smaller screens */
+        padding: 8px 5px; /* Adjust padding for smaller screens */
     }
 
     .riddle-button {
