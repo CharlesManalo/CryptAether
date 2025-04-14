@@ -4,6 +4,7 @@ body {
     font-family: 'Courier New', monospace;
     color: #00ff00; /* Neon green text */
     overflow: hidden; /* Prevent scrolling */
+    background-color: #0d0d0d; /* Dark background to match other pages */
 }
 
 .backdrop {
@@ -29,4 +30,286 @@ body {
 #timer {
     font-size: 2em; /* Timer font size */
     text-align: center;
+}
+
+.image-container {
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    height: 100vh; /* Full height */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    z-index: 2; /* Ensure it appears above the backdrop */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#hidden-image {
+    max-width: 80%; /* Limit width to 80% of container */
+    max-height: 60vh; /* Limit height */
+    margin-bottom: 20px; /* Space between image and input */
+}
+
+#user-input {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+}
+
+#verify-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+}
+
+#message {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #00ff00;
+    text-align: center;
+}
+
+/* Timer overlay for lockout */
+.timer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.8); /* Darker overlay */
+    backdrop-filter: blur(10px); /* Increased blur effect */
+    color: #00ff00; /* Neon green text */
+    font-size: 2em; /* Adjust font size for visibility */
+    z-index: 100; /* Ensure it appears above other elements */
+    display: none; /* Initially hidden */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    text-align: center;
+}
+
+/* Animation for the lock timer */
+@keyframes pulse {
+    0% { text-shadow: 0 0 5px rgba(0, 255, 0, 0.7); }
+    50% { text-shadow: 0 0 20px rgba(0, 255, 0, 1); }
+    100% { text-shadow: 0 0 5px rgba(0, 255, 0, 0.7); }
+}
+
+.timer-overlay {
+    animation: pulse 2s infinite;
+}
+
+.success-text {
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
+}
+
+.next-link {
+    color: #00ff00;
+    text-decoration: none;
+    font-size: 1.1em;
+    border: 2px solid #00ff00;
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 15px;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    transition: all 0.3s ease;
+}
+
+
+.next-link:hover {
+    background-color: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
+}
+
+/* Celebration effect when correct answer is given */
+@keyframes success-glow {
+    0% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.7); background-color: rgba(0, 255, 0, 0.05); }
+    50% { box-shadow: 0 0 30px rgba(0, 255, 0, 1); background-color: rgba(0, 255, 0, 0.1); }
+    100% { box-shadow: 0 0 5px rgba(0, 255, 0, 0.7); background-color: rgba(0, 255, 0, 0.05); }
+}
+
+body.success #message {
+    animation: success-glow 2s infinite;
+    border: 2px solid #00ff00;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+}
+
+.hint-container {
+    margin: 15px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.hint-link {
+    color: #00ff00;
+    text-decoration: none;
+    font-size: 1.1em;
+    border: 2px solid #00ff00;
+    padding: 5px 15px;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 10px 0;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.7);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-family: 'Courier New', monospace;
+}
+
+.hint-link:hover {
+    background-color: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 1);
+    animation: glow 1.5s infinite;
+}
+
+/* Keyframes for button glow animation */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(0, 255, 0, 1); }
+    100% { box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
+}
+
+.hint-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 450px;
+    text-align: center;
+    color: #00ff00;
+    font-size: 1em;
+    line-height: 1.5;
+    white-space: pre-line;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
+    border-radius: 5px;
+    opacity: 0;
+    animation: messageSlideIn 0.5s forwards;
+}
+
+.hint-message.closing {
+    animation: messageSlideOut 0.5s forwards;
+}
+
+/* Message animations */
+@keyframes messageSlideIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes messageSlideOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+}
+
+/* Message backdrop */
+.message-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 90;
+    display: none;
+    opacity: 0;
+    animation: backdropFadeIn 0.4s forwards;
+}
+
+.message-backdrop.closing {
+    animation: backdropFadeOut 0.4s forwards;
+}
+
+@keyframes backdropFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes backdropFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.hint-message h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #00ff00;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+    font-size: 1.2em;
+}
+
+.hint-message p {
+    margin: 8px 0;
+    line-height: 1.4;
+    font-size: 0.95em;
+}
+
+.hint-message .highlight {
+    color: #00ff00;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+}
+
+.hint-message .small-text {
+    font-size: 0.85em;
+    font-style: italic;
+    color: #ccffcc;
+}
+
+/* For smaller screens, make message box even smaller */
+@media (max-width: 600px) {
+    .hint-message {
+        width: 90%;
+        max-width: 320px;
+        padding: 15px;
+        font-size: 0.9em;
+    }
+    
+    .hint-message h3 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+    
+    .hint-message p {
+        margin: 6px 0;
+        line-height: 1.3;
+    }
 }
