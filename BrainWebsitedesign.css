@@ -82,13 +82,13 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px) translateX(-50%); }
-    to { opacity: 1; transform: translateY(0) translateX(-50%); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; transform: translateY(0) translateX(-50%); }
-    to { opacity: 0; transform: translateY(20px) translateX(-50%); }
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
 @keyframes glow {
@@ -107,26 +107,33 @@ body {
 }
 
 .riddle-text {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative; /* Changed from fixed to relative since it's in a flex container */
     width: 80%;
     max-width: 600px;
     text-align: center;
-    color: #00ff00; /* Neon green text */
+    color: #00ff00;
     font-size: 1.2em;
     line-height: 1.6;
     white-space: pre-line;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
-    display: none;
-    top: 50%;
-    margin-top: 10px;
-    z-index: 100;
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background for riddle text */
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 25px;
-    border: 2px solid #00ff00; /* Neon green border */
+    border: 2px solid #00ff00;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
     border-radius: 5px;
+    z-index: 100;
+    opacity: 1; /* Ensure it's visible by default */
+}
+
+#message-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
 }
 
 .backdrop {
@@ -137,26 +144,23 @@ body {
     bottom: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8); /* Darker backdrop */
-    backdrop-filter: blur(10px); /* Increased blur for a more mysterious effect */
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
     z-index: 50;
     display: none;
-    margin: 0;
-    padding: 0;
 }
 
 .backdrop.show {
-    animation: fadeInBackdrop 0.3s ease forwards;
+    animation: fadeIn 0.3s ease forwards;
 }
 
 .backdrop.hide {
-    animation: fadeOutBackdrop 0.3s ease forwards;
+    animation: fadeOut 0.3s ease forwards;
 }
 
 .riddle-text.show {
-    display: block;
     animation: fadeIn 0.5s ease forwards;
+    opacity: 1;
 }
 
 .riddle-text.hide {
@@ -164,12 +168,12 @@ body {
 }
 
 /* Additional fade animations for backdrop */
-@keyframes fadeInBackdrop {
+@keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@keyframes fadeOutBackdrop {
+@keyframes fadeOut {
     from { opacity: 1; }
     to { opacity: 0; }
 }
@@ -271,6 +275,7 @@ body {
         font-size: 5vw; /* Adjust button font size */
         padding: 8px; /* Adjust padding for smaller screens */
     }
+    
 
     .riddle-text {
         font-size: 4vw; /* Adjust riddle text size */
